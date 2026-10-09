@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conócenos · Tu Organización</title>
+<meta name="description" content="Sitio informativo de Tu Organización.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=Public+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<header class="site-header"><div class="wrap bar">
+<a class="brand" href="index.html">Tu Organización</a>
+<input type="checkbox" id="menu" class="menu-toggle" aria-label="Mostrar menú">
+<label for="menu" class="menu-btn">Menú</label>
+<nav class="nav" aria-label="Principal"><a href="index.html">Inicio</a><a href="quienes-somos.html">¿Quiénes Somos?</a><a href="actividades.html">Eventos</a><a href="conocenos.html" aria-current="page">Reuniones</a><a href="videos.html">Predicaciones</a></nav>
+</div></header>
+<main>
+<!-- Para que una reunión aparezca como "Próxima reunión" en Inicio, agrega a su <div> atributos como estos:
+  data-dia="0" data-hora="11:00" data-titulo="Nombre que se verá en Inicio"   (0=domingo ... 6=sábado)
+  Si la reunión es en una fecha fija, usa data-fecha="2026-11-07" data-hora="11:00" -->
+<section class="wrap page-title"><h1>Reuniones</h1></section>
+<section class="section"><div class="wrap cols two">
+<div data-dia="0" data-hora="11:00" data-titulo="Reunión General, Peñuelas"><h2>Reunión General</h2><p>Descripción</p><h3>Peñuelas</h3><p>Domingos 11:00 am</p></div>
+<div class="photo mapa">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7000!2d-100.47380997842873!3d20.670336301022918!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d35aff1618b935%3A0xf5c42fa69e7d0ba6!2sCentro%20Cristiano%20Peniel%20Quer%C3%A9taro!5e0!3m2!1ses!2smx!4v1791179912611!5m2!1ses!2smx" title="Mapa con nuestra ubicación" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+</div></section>
+<section class="section" style="padding-top:0"><div class="wrap"><h2>Células</h2><p>Descripción</p><div class="cols three">
+<div><h3>El Salitre</h3><p>Miércoles 7:00 pm</p></div>
+<div><h3>El Sol</h3><p>Miércoles 7:00 pm</p></div>
+<div><h3>Desarrollo San Pablo</h3><p>Miércoles 12:00 pm</p></div>
+<div><h3>Desarrollo San Pablo</h3><p>Miércoles 12:00 pm</p></div>
+</div></div></section>
+</main>
+<footer class="site-footer"><div class="wrap"><p>© 2026 Tu Organización. Contacto: <a href="mailto:contacto@ejemplo.org">contacto@ejemplo.org</a></p></div></footer>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inicio · Tu Organización</title>
+<meta name="description" content="Sitio informativo de Tu Organización.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=Public+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<header class="site-header"><div class="wrap bar">
+<a class="brand" href="index.html">Tu Organización</a>
+<input type="checkbox" id="menu" class="menu-toggle" aria-label="Mostrar menú">
+<label for="menu" class="menu-btn">Menú</label>
+<nav class="nav" aria-label="Principal"><a href="index.html" aria-current="page">Inicio</a><a href="quienes-somos.html">¿Quiénes Somos?</a><a href="actividades.html">Eventos</a><a href="conocenos.html">Reuniones</a><a href="videos.html">Predicaciones</a></nav>
+</div></header>
+<main>
+<section class="hero"><div class="wrap">
+<h1>Trabajamos juntos por nuestra comunidad</h1>
+<p>Somos una organización que reúne a personas con un propósito común. Aquí encontrarás qué hacemos, quiénes somos y cómo puedes participar.</p>
+<a class="btn" href="actividades.html">Ver actividades</a>
+</div></section>
+<section class="section"><div class="wrap">
+<h2>Próximamente</h2>
+<div class="next">
+<div class="next-item" id="proximo-evento">
+<h3>Próximo evento</h3>
+<div class="next-body"><p>Consulta las fechas en la página de <a href="actividades.html">Eventos</a>.</p></div>
+</div>
+<div class="next-item" id="proxima-reunion">
+<h3>Próxima reunión</h3>
+<div class="next-body"><p>Consulta los horarios en la página de <a href="conocenos.html">Reuniones</a>.</p></div>
+</div>
+</div>
+</div></section>
+<section class="section"><div class="wrap cols three">
+<div><h3>Qué hacemos</h3><p>Organizamos encuentros, talleres y proyectos abiertos a todo público durante el año.</p></div>
+<div><h3>Cómo participar</h3><p>Puedes asistir a cualquier actividad sin registro previo, o escribirnos para colaborar.</p></div>
+<div><h3>Dónde estamos</h3><p>Calle Ejemplo 123, Ciudad. Atendemos de lunes a viernes, de 9:00 a 17:00 h.</p></div>
+</div></section>
+<section class="section"><div class="wrap">
+<h2>Síguenos</h2>
+<p>Encuéntranos en redes sociales para enterarte de lo que viene.</p>
+<ul class="social">
+<li><a href="https://www.facebook.com/TU_PAGINA" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a></li>
+<li><a href="https://www.instagram.com/TU_USUARIO" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
+<li><a href="https://www.youtube.com/@TU_CANAL" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a></li>
+</ul>
+</div></section>
+</main>
+<footer class="site-footer"><div class="wrap"><p>© 2026 Tu Organización. Contacto: <a href="mailto:contacto@ejemplo.org">contacto@ejemplo.org</a></p></div></footer>
+<script>
+(function(){
+  var fFecha=new Intl.DateTimeFormat('es-MX',{weekday:'long',day:'numeric',month:'long'});
+  var fHora=new Intl.DateTimeFormat('es-MX',{hour:'numeric',minute:'2-digit'});
+
+  /* Devuelve la próxima fecha (a partir de ahora) de un evento o reunión, o null */
+  function proxima(el,ahora){
+    var hm=(el.dataset.hora||'23:59').split(':'), h=+hm[0], m=+hm[1];
+    if(el.dataset.fecha){
+      var p=el.dataset.fecha.split('-');
+      var f=new Date(+p[0],+p[1]-1,+p[2],h,m);
+      return f>=ahora?f:null;
+    }
+    if(el.dataset.dia===undefined) return null;
+    var dia=+el.dataset.dia, semana=+(el.dataset.semana||0);
+    if(!semana){
+      var f2=new Date(ahora.getFullYear(),ahora.getMonth(),ahora.getDate()+(dia-ahora.getDay()+7)%7,h,m);
+      if(f2<ahora) f2.setDate(f2.getDate()+7);
+      return f2;
+    }
+    for(var i=0;i<3;i++){
+      var base=new Date(ahora.getFullYear(),ahora.getMonth()+i,1);
+      var dd=1+(dia-base.getDay()+7)%7+(semana-1)*7;
+      var f3=new Date(base.getFullYear(),base.getMonth(),dd,h,m);
+      if(f3.getMonth()===base.getMonth()&&f3>=ahora) return f3;
+    }
+    return null;
+  }
+
+  /* Lee la página indicada, elige lo más próximo y lo muestra en la tarjeta */
+  function mostrar(id,url,verTodo){
+    var caja=document.querySelector('#'+id+' .next-body');
+    fetch(url).then(function(r){ if(!r.ok) throw new Error(r.status); return r.text(); })
+    .then(function(txt){
+      var doc=new DOMParser().parseFromString(txt,'text/html');
+      var ahora=new Date(), mejor=null;
+      doc.querySelectorAll('[data-fecha],[data-dia]').forEach(function(el){
+        var f=proxima(el,ahora);
+        if(f&&(!mejor||f<mejor.f)) mejor={el:el,f:f};
+      });
+      if(!mejor) return;
+      var h3=mejor.el.querySelector('h3');
+      var titulo=mejor.el.dataset.titulo||(h3?h3.textContent:'');
+      var fecha=fFecha.format(mejor.f);
+      fecha=fecha.charAt(0).toUpperCase()+fecha.slice(1);
+      if(mejor.el.dataset.hora) fecha+=', '+fHora.format(mejor.f);
+      caja.textContent='';
+      var n=document.createElement('p'); n.className='next-name'; n.textContent=titulo;
+      var d=document.createElement('p'); d.className='next-date'; d.textContent=fecha;
+      var a=document.createElement('a'); a.href=url; a.textContent=verTodo;
+      caja.append(n,d,a);
+    }).catch(function(){ /* sin servidor (file://) o sin datos: se queda el texto de respaldo */ });
+  }
+
+  mostrar('proximo-evento','actividades.html','Ver todos los eventos');
+  mostrar('proxima-reunion','conocenos.html','Ver todas las reuniones');
+})();
+</script>
+</body>
+</html>

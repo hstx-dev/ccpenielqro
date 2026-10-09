@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Actividades · Tu Organización</title>
+<meta name="description" content="Sitio informativo de Tu Organización.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=Public+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<header class="site-header"><div class="wrap bar">
+<a class="brand" href="index.html">Tu Organización</a>
+<input type="checkbox" id="menu" class="menu-toggle" aria-label="Mostrar menú">
+<label for="menu" class="menu-btn">Menú</label>
+<nav class="nav" aria-label="Principal"><a href="index.html">Inicio</a><a href="quienes-somos.html">¿Quiénes Somos?</a><a href="actividades.html" aria-current="page">Eventos</a><a href="conocenos.html">Reuniones</a><a href="videos.html">Predicaciones</a></nav>
+</div></header>
+<main>
+<!-- Para que un evento aparezca como "Próximo evento" en Inicio, agrega a su <article> atributos de fecha:
+  Fecha fija:       data-fecha="2026-11-07" data-hora="18:30"   (la hora es opcional)
+  Cada semana:      data-dia="6" data-hora="10:00"              (0=domingo, 1=lunes ... 6=sábado)
+  Cada mes:         data-dia="4" data-semana="1" data-hora="18:30"   (semana 1 a 4: aquí, el primer jueves)
+  Los eventos sin estos atributos no se muestran en Inicio. -->
+<section class="wrap page-title"><h1>Actividades</h1><p>Esto es lo que organizamos durante el año. Reemplaza estos textos por tus actividades reales.</p></section><section class="section"><div class="wrap"><article class="act" data-dia="6" data-hora="10:00"><div class="when"><strong>Sábados</strong><span>10:00 h</span></div><div><h3>Taller comunitario</h3><p>Un espacio para aprender y compartir habilidades. Los materiales los ponemos nosotros.</p></div></article><article class="act" data-dia="4" data-semana="1" data-hora="18:30"><div class="when"><strong>Primer jueves</strong><span>18:30 h</span></div><div><h3>Charla abierta</h3><p>Invitamos a una persona a conversar sobre un tema de interés. Después hay café y conversación.</p></div></article><article class="act"><div class="when"><strong>Cada mes</strong><span>Fecha por anunciar</span></div><div><h3>Jornada de servicio</h3><p>Salimos a trabajar en un proyecto concreto del barrio. Se necesitan manos de todas las edades.</p></div></article><article class="act"><div class="when"><strong>Julio</strong><span>Dos semanas</span></div><div><h3>Campamento de verano</h3><p>Actividades al aire libre para niñas y niños. Hay cupo limitado y registro previo.</p></div></article></div></section>
+</main>
+<footer class="site-footer"><div class="wrap"><p>© 2026 Tu Organización. Contacto: <a href="mailto:contacto@ejemplo.org">contacto@ejemplo.org</a></p></div></footer>
+</body>
+</html>
